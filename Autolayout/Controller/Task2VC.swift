@@ -1,0 +1,90 @@
+//
+//  ViewController.swift
+//  Autolayout
+//
+//  Created by Алина Власенко on 10.02.2023.
+//
+
+
+//Task 2:
+//Скрін по натисканню на кнопку Task 2. Містить довільну картинку та текстове поле Label. Картинка повинна мати співвідношення таке саме, як у реального зображення. Текст розміщується по центру області що залишилась.
+
+
+import UIKit
+
+class Task2VC: UIViewController {
+    
+    //MARK: - UI objects
+    
+    private let image: UIImageView = {
+        let img = UIImageView()
+        img.image = UIImage(named: "cat")
+        //Картинка повинна мати співвідношення таке саме, як у реального зображення. Роблю за допомогою contentMode = .scaleAspectFit
+        img.contentMode = .scaleAspectFit
+        img.layer.shadowRadius = 5
+        img.layer.shadowOpacity = 1
+        img.layer.shadowOffset = CGSize(width: 1, height: 1)
+        img.layer.shadowColor = UIColor.black.cgColor
+        img.translatesAutoresizingMaskIntoConstraints = false
+        return img
+    }()
+    
+    private let comment: UILabel = {
+        let label = UILabel()
+        label.text = "This cat is so cute"
+        //Задаю розміри і шрифт вказані у завданні
+        label.font = UIFont.systemFont(ofSize: 17)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    //MARK: - viewDidLoad
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = .systemBackground
+        configureNavigationBar()
+        addSubviews()
+        applyConstraints()
+    }
+    
+    //MARK: - Add subviews
+    
+    private func addSubviews() {
+        view.addSubview(image)
+        view.addSubview(comment)
+    }
+    
+    //MARK: - Configure NavBar
+    
+    private func configureNavigationBar() {
+        title = "Task 2"
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.backgroundColor = UIColor(named: "NavBackground")
+        navigationController?.navigationBar.tintColor = .white
+    }
+    
+    //MARK: - Apply constraints
+    
+    private func applyConstraints() {
+        let imageConstraints = [
+//!!!      //Не стає на місце картинка - має бути зверху з відступом: 8. Якщо роблю відступ зверху -106 і потім лейблі додаю відступ від картинки десь 70, то вирівнюється на 12 Pro Max. Але ж то на різних екранах вже не працюватиме як слід. Не розумію з відки реруться ці зайві маржени у картинки (через те що я зробила її пропорційно меншою за відступами з боків?
+            //image.topAnchor.constraint(equalTo: view.topAnchor, constant: -106),
+            image.topAnchor.constraint(equalTo: view.topAnchor, constant: 8),
+            image.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8),
+            image.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8)
+        ]
+        
+        let commentConstraints = [
+            comment.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            //роблю текст по центру від картинки до низу екрана(як вказано у завданні)
+            comment.centerYAnchor.constraint(equalTo: image.bottomAnchor)
+            //comment.centerYAnchor.constraint(equalTo: image.bottomAnchor, constant: 70),
+        ]
+        
+        NSLayoutConstraint.activate(imageConstraints)
+        NSLayoutConstraint.activate(commentConstraints)
+        
+    }
+}
