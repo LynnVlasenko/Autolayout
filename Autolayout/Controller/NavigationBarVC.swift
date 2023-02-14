@@ -33,10 +33,14 @@ class NavigationBarVC: UIViewController {
         let button = UIButton()
         button.setTitle("Task2", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(.gray, for: .selected)
+        button.setTitleColor(.systemGray4, for: .highlighted)
         button.backgroundColor = UIColor(named: "ButtonColor")
         //button.frame = CGRect(x: 40, y: 50, width: 90, height: 40)
         button.layer.cornerRadius = 8
+        button.layer.shadowRadius = 5
+        button.layer.shadowOpacity = 0.2
+        button.layer.shadowOffset = CGSize(width: 5, height: 5)
+        button.layer.shadowColor = UIColor.black.cgColor
         button.addTarget(self, action: #selector(goToTask2VC), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
@@ -47,10 +51,14 @@ class NavigationBarVC: UIViewController {
         let button = UIButton()
         button.setTitle("Task3", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.setTitleColor(.gray, for: .selected)
+        button.setTitleColor(.systemGray4, for: .highlighted)
         button.backgroundColor = UIColor(named: "ButtonColor")
         //button.frame = CGRect(x: 230, y: 50, width: 90, height: 40)
         button.layer.cornerRadius = 8
+        button.layer.shadowRadius = 5
+        button.layer.shadowOpacity = 0.2
+        button.layer.shadowOffset = CGSize(width: 5, height: 5)
+        button.layer.shadowColor = UIColor.black.cgColor
         button.addTarget(self, action: #selector(goToTask3VC), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .horizontal)
@@ -73,12 +81,11 @@ class NavigationBarVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(named: "ViewBackground")
         
-        //navigationController?.navigationBar.delegate = self
         configureNavigationBar()
         addSubviews()
         applyConstraints()
-        
     }
 
     //MARK: - Add subviews
@@ -95,10 +102,17 @@ class NavigationBarVC: UIViewController {
     
     private func configureNavigationBar() {
         title = "Autolayout"
-        navigationController?.navigationBar.backgroundColor = UIColor(named: "NavBackground")
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        view.backgroundColor = UIColor(named: "ViewBackground")
-    }
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(named: "NavBackground")
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
+        navigationController?.navigationBar.tintColor = .white
+
+//        navigationController?.popToRootViewController(animated: true)
+   }
     
     //MARK: - Actions for Buttons //It work like TabBar
 
@@ -135,7 +149,7 @@ class NavigationBarVC: UIViewController {
 
         let task3BtnConstraints = [
 //!!!       //не працює відступ від краю контейнера для правої кнопки..
-            task3Btn.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -40),
+            task3Btn.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: 40),
             task3Btn.widthAnchor.constraint(equalToConstant: 90),
             task3Btn.heightAnchor.constraint(equalToConstant: 40)
         ]
@@ -146,13 +160,3 @@ class NavigationBarVC: UIViewController {
         NSLayoutConstraint.activate(task3BtnConstraints)
     }
 }
-
-
-
-//Намагання зробити екстеншн для розширення фону НавБара до верха екрану
-
-//extension NavigationBarVC: UINavigationBarDelegate {
-//    func position(for bar: UIBarPositioning) -> UIBarPosition {
-//        return .topAttached
-//    }
-//}

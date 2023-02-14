@@ -22,8 +22,8 @@ class Task2VC: UIViewController {
         //Картинка повинна мати співвідношення таке саме, як у реального зображення. Роблю за допомогою contentMode = .scaleAspectFit
         img.contentMode = .scaleAspectFit
         img.layer.shadowRadius = 5
-        img.layer.shadowOpacity = 1
-        img.layer.shadowOffset = CGSize(width: 1, height: 1)
+        img.layer.shadowOpacity = 0.5
+        img.layer.shadowOffset = CGSize(width: -2, height: 2)
         img.layer.shadowColor = UIColor.black.cgColor
         img.translatesAutoresizingMaskIntoConstraints = false
         return img
@@ -42,9 +42,9 @@ class Task2VC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "Task 2"
         view.backgroundColor = .systemBackground
-        configureNavigationBar()
+        
         addSubviews()
         applyConstraints()
     }
@@ -54,15 +54,6 @@ class Task2VC: UIViewController {
     private func addSubviews() {
         view.addSubview(image)
         view.addSubview(comment)
-    }
-    
-    //MARK: - Configure NavBar
-    
-    private func configureNavigationBar() {
-        title = "Task 2"
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.backgroundColor = UIColor(named: "NavBackground")
-        navigationController?.navigationBar.tintColor = .white
     }
     
     //MARK: - Apply constraints

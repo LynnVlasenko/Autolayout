@@ -82,9 +82,9 @@ class Task3VC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Task 3"
         view.backgroundColor = .systemBackground
         
-        configureNavigationBar()
         addSubviews()
         applyConstraints()
         applyDelegat()
@@ -101,15 +101,6 @@ class Task3VC: UIViewController {
         subContainer.addArrangedSubview(lbl2)
         subContainer.addArrangedSubview(textField2)
         
-    }
-    
-    //MARK: - Configure NavBar
-
-    private func configureNavigationBar() {
-        title = "Task 3"
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.backgroundColor = UIColor(named: "NavBackground")
-        navigationController?.navigationBar.tintColor = .white
     }
     
     //MARK: - Apply constraints
