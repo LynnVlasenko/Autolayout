@@ -64,6 +64,9 @@ class Task3VC: UIViewController {
         //container.backgroundColor = .groupTableViewBackground
         container.backgroundColor = .systemGray5
         container.translatesAutoresizingMaskIntoConstraints = false
+        //код який дозволяє заокруглювати певні кути, які нам потрібні: layerMinXMinYCorner - top left corner; layerMaxXMinYCorner - top right corner; layerMinXMaxYCorner - bottom left corner; layerMaxXMaxYCorner - bottom right corner
+//        container.layer.cornerRadius = 44
+//        container.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         return container
     }()
     
@@ -109,7 +112,8 @@ class Task3VC: UIViewController {
         let containerConstraints = [
 //!!!        //як зробити відступ від NavBar?
             //container.topAnchor.constraint(equalTo: navigationController!.navigationBar.bottomAnchor, constant: 8),
-            container.topAnchor.constraint(equalTo: view.topAnchor, constant: 8),
+            //safeAreaLayoutGuide - дозволяє відступатися від Navigation Bar, а не від верху самої вьюшки(не ховаючи об'єкт за Нав Баром))
+            container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             container.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8),
             container.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             container.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8)
