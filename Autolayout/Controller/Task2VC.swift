@@ -20,7 +20,8 @@ class Task2VC: UIViewController {
         let img = UIImageView()
         img.image = UIImage(named: "cat")
         //Картинка повинна мати співвідношення таке саме, як у реального зображення. Роблю за допомогою contentMode = .scaleAspectFit
-        img.contentMode = .scaleAspectFit
+        img.clipsToBounds = true
+        img.contentMode = .scaleAspectFill
         img.layer.shadowRadius = 5
         img.layer.shadowOpacity = 0.5
         img.layer.shadowOffset = CGSize(width: -2, height: 2)
@@ -62,15 +63,18 @@ class Task2VC: UIViewController {
         let imageConstraints = [
 //!!!      //Не стає на місце картинка - має бути зверху з відступом: 8. Якщо роблю відступ зверху -106 і потім лейблі додаю відступ від картинки десь 70, то вирівнюється на 12 Pro Max. Але ж то на різних екранах вже не працюватиме як слід. Не розумію з відки реруться ці зайві маржени у картинки (через те що я зробила її пропорційно меншою за відступами з боків?
             //image.topAnchor.constraint(equalTo: view.topAnchor, constant: -106),
-            image.topAnchor.constraint(equalTo: view.topAnchor, constant: 8),
+            image.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            //image.topAnchor.constraint(equalTo: view.topAnchor, constant: 8),
             image.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8),
-            image.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8)
+            image.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8),
+            image.heightAnchor.constraint(equalToConstant: view.frame.height / 3)
         ]
         
         let commentConstraints = [
             comment.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            comment.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -((view.frame.height - view.frame.height / 3) / 2))
             //роблю текст по центру від картинки до низу екрана(як вказано у завданні)
-            comment.centerYAnchor.constraint(equalTo: image.bottomAnchor)
+            //comment.centerYAnchor.constraint(equalTo: image.bottomAnchor)
             //comment.centerYAnchor.constraint(equalTo: image.bottomAnchor, constant: 70),
         ]
         
