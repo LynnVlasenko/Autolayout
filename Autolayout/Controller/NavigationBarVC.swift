@@ -69,8 +69,11 @@ class NavigationBarVC: UIViewController {
         let container = UIStackView()
         container.axis = .horizontal
         container.alignment = .center
-        //container.spacing = 20
-        container.distribution = .equalCentering
+        container.spacing = 360 - (40 + 90) * 2
+        container.isLayoutMarginsRelativeArrangement = true //Якщо true то елементи залежать в вказаних границь, Якщо false (по дефолту) - То вирівнюється по границі самого стeка
+        //І потім вказуємо кастомні марджини в .layoutMargins
+        container.layoutMargins = UIEdgeInsets(top: 0, left: 40, bottom: 0, right: 40)
+        //container.distribution = .equalCentering
         container.backgroundColor = UIColor(named: "ContainerBackground")
         container.translatesAutoresizingMaskIntoConstraints = false
         //[self.task2Btn, self.task3Btn].forEach { container.addArrangedSubview($0) }
@@ -142,14 +145,16 @@ class NavigationBarVC: UIViewController {
         ]
         
         let task2BtnConstraints = [
-            task2Btn.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 40),
+            task2Btn.centerYAnchor.constraint(equalTo: container.centerYAnchor),
+            //task2Btn.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 40),
             task2Btn.widthAnchor.constraint(equalToConstant: 90),
             task2Btn.heightAnchor.constraint(equalToConstant: 40)
         ]
 
         let task3BtnConstraints = [
 //!!!       //не працює відступ від краю контейнера для правої кнопки..
-            task3Btn.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: 40),
+            //task3Btn.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: 40),
+            task3Btn.centerYAnchor.constraint(equalTo: container.centerYAnchor),
             task3Btn.widthAnchor.constraint(equalToConstant: 90),
             task3Btn.heightAnchor.constraint(equalToConstant: 40)
         ]
