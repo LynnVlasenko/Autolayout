@@ -20,8 +20,8 @@ class Task2VC: UIViewController {
         let img = UIImageView()
         img.image = UIImage(named: "cat")
         //Картинка повинна мати співвідношення таке саме, як у реального зображення. Роблю за допомогою contentMode = .scaleAspectFit
-        img.clipsToBounds = true
-        img.contentMode = .scaleAspectFill
+        img.clipsToBounds = true //дозволяє зберігати пропорції картинки
+        img.contentMode = .scaleAspectFill //розтягує картинку до вказаний констрейнтами обмежень
         img.layer.shadowRadius = 5
         img.layer.shadowOpacity = 0.5
         img.layer.shadowOffset = CGSize(width: -2, height: 2)
@@ -67,11 +67,13 @@ class Task2VC: UIViewController {
             //image.topAnchor.constraint(equalTo: view.topAnchor, constant: 8),
             image.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8),
             image.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8),
+            //висота картинки буде займати 3 частину екрана
             image.heightAnchor.constraint(equalToConstant: view.frame.height / 3)
         ]
         
         let commentConstraints = [
             comment.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            //комент до картинки відбивається з низу на половину від 2/3 екрана
             comment.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -((view.frame.height - view.frame.height / 3) / 2))
             //роблю текст по центру від картинки до низу екрана(як вказано у завданні)
             //comment.centerYAnchor.constraint(equalTo: image.bottomAnchor)
