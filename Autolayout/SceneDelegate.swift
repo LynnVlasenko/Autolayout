@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let controller = NavigationBarVC()
         let navController = UINavigationController(rootViewController: controller)
         window?.rootViewController = navController
-        //navController.modalPresentationStyle = .fullScreen
+        //navController.modalPresentationStyle = .fullScreen 
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
